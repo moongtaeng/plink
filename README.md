@@ -25,9 +25,37 @@ PLink 는 기본적으로 Fiddler 를 기반으로 하고 있습니다.
 기존에 웹 디버깅 툴로 Fiddler 를 많이 사용하고 계신데요, 
 여기에 애드온 형태로 개발환경을 좀 더 편하게 접속 할 수 있는 기능들을 추가했습니다. 
 
-1. URL 변경 
-2. HOST 변경
-3. 패턴 적용 
+
+#### URL 변경 
+
+`www.pmang.com` => `dev.test.com/~neowizgame/home`
+
+URL 변경은 위와 같이 특정 디렉토리로 홈이 걸려 있는 경우 hosts 파일을 설정하지 않고 도메인을 바로 다른 URL로 매칭시키는 방법입니다. 
+개발자별로 특정 디렉토리를 가지고 있거나  하나의 호스팅 서비스에 개발환경을 구성할 때 유용한 방법입니다. 
+
+#### HOST 변경
+
+`www.pmang.com` => `www.test.com`
+
+이 방법을 쓰면 실제로 연결 되는 곳이 `www.pmang.com` 으로 접근을 해도 실제로 연결되는 곳이 `www.test.com` 으로 연결이 됩니다. 
+이 방법은 hosts 파일을 바꾸는 것과 같은 효과를 주며 실제로 hosts파일을 변경하지 않고 host 를 변경한 효과를 주기 때문에  
+하나의 서버에 여러대의 서브 도메인을 가지고 있을 때 유용하게 사용하 실 수 있습니다. 
+
+
+#### 패턴 적용 
+
+
+1,2 번의 방법은 도메인 자체에 대해서 적용이 되는 방법이었습니다. 
+마지막으로 3번 패턴 적용은  url 자체를 내부적으로 변환해서 실제 url 과 같은 효과를 줄 수 있게 변경합니다. 
+
+`www.pmang.com` => `www.test.com`
+
+`www.pmang.com/index.nwz` => `www.test.com/~neowizgames/test/index.nwz`
+
+`www.pmang.com/index_beta.nwz` => `www.test.com/~neowizgames/test_beta/index.nwz`
+
+url 을 자체를 변환하기 때문에  1,2 에 더해서 좀 더 유용하게 패턴을 정의할 수 있습니다. 
+
 
 위의 3가지 상태에 따라 여러가지 개발환경을 접속할 수 있는 기능을 가지게 됩니다. 
 

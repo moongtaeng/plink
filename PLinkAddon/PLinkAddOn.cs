@@ -4,7 +4,21 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Fiddler;
 using PLinkCore;
+using System;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
+[assembly: AssemblyTitle("PLinkAddOn")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("PLinkAddOn")]
+[assembly: AssemblyCopyright("Copyright 2012")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+[assembly: ComVisible(false)]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: Fiddler.RequiredVersion("2.2.8.6")]
 
 namespace PLink 

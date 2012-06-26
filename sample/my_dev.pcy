@@ -1,0 +1,9 @@
+# My Dev 
+# test domain 
+1, 1, my.domain.com, 127.0.0.1, 나의 개발환경 1 
+1, 1, my2.domain.com, 127.0.0.1:8080, 나의 개발환경 2  
+1, 1, my3.domain.com, 127.0.0.1:9090, 나의 개발환경 3 
+1, 2, my.domain.kr,  127.0.0.1/dev, 테스트 환경 구성 
+1, 2, my2.domain.kr,  127.0.0.1/alpha, 테스트 환경 구성 
+1, 2, my3.domain.kr,  127.0.0.1/beta, 테스트 환경 구성 
+

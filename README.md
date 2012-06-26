@@ -1,13 +1,10 @@
-﻿PLink - 개발환경 접속 에이전트
-=============================
+﻿# PLink - 개발환경 접속 에이전트
 
-PLInk 는 무엇인가요? 
---------------------
+## PLInk 는 무엇인가요? 
 
 PLink 는 네오위즈에서 사용하던 개발환경 접속 에이전트를 오픈소스로 옮긴 것입니다. 
 
-PLink 는 Proxy 입니다. 
-----------------------
+## PLink 는 Proxy 입니다. 
 
 1. PLink 는 Proxy(Fiddler Addon)이기 때문에 웹브라우저와 상관없이 동작합니다. 
 1. 브라우저에 맞는 애드온을 설치하실 필요가 없습니다. 
@@ -17,8 +14,7 @@ PLink 는 Proxy 입니다.
 1. 윈도우 전용 어플입니다. (다른 운영체제에서는 다르게 접속하실 수 있습니다.)  [참고](http://fiddler2.com/fiddler/help/hookup.asp)
 
 
-개발환경 접속을 한다는게 무슨 말인가요?
---------------------------------------- 
+## 개발환경 접속을 한다는게 무슨 말인가요?
 
 보통 웹서비스를 개발한다고 한다면 **alpha**, **beta**, **real** 3가지 정도의 서버 규모가 있는데요. 
 alpha, beta 서버를 접근을 할려면  매번 수많은 도메인이 있는 hosts 파일을 수정해서 사용했어야 했습니다.  
@@ -26,8 +22,7 @@ alpha, beta 서버를 접근을 할려면  매번 수많은 도메인이 있는 
 PLink 는 그러한 불편한 점을 많이 개선하였습니다. 
  
 
-PLink 는 어떤 기능이 있나요? 
-----------------------------
+## PLink 는 어떤 기능이 있나요? 
 
 PLink 는 기본적으로 [Fiddler](http://www.fiddler2.com) 를 기반으로 하고 있습니다. 
 기존에 웹 디버깅 툴로 Fiddler 를 많이 사용하고 계신데요.
@@ -66,5 +61,14 @@ url 을 자체를 변환하기 때문에  1,2 에 더해서 좀 더 유용하게
 
 위의 3가지 상태에 따라 여러가지 개발환경을 접속할 수 있는 기능을 가지게 됩니다. 
 
-PLink 는  Fiddler Addon 과 exe 버전  두 가지가 있습니다. 
---------------------------------------------------------
+## PLink 는  Fiddler Addon 과 exe 버전  두 가지가 있습니다. 
+
+# The MIT License (MIT)
+
+## Copyright (c) 2012 NEOWIZ GAMES
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

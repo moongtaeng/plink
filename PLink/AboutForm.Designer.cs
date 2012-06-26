@@ -70,10 +70,9 @@ namespace PLink
 			this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.richTextBox1.Location = new System.Drawing.Point(118, 12);
 			this.richTextBox1.Name = "richTextBox1";
-			this.richTextBox1.Size = new System.Drawing.Size(341, 236);
+			this.richTextBox1.Size = new System.Drawing.Size(341, 84);
 			this.richTextBox1.TabIndex = 2;
-			this.richTextBox1.Text = "PLink \n\n\n\nNEOWIZ GAMES Corp.\n\n\n--------------------------------------------------" +
-			"--\n\n\ne-mail : easylogic@neowiz.com";
+			this.richTextBox1.Text = "PLink \n\n\ne-mail : easylogic@neowiz.com";
 			this.richTextBox1.TextChanged += new System.EventHandler(this.RichTextBox1TextChanged);
 			// 
 			// AboutForm

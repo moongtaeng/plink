@@ -23,4 +23,4 @@ Plink, embedded itself as add-on, provides simple & easy features to switch over
 3. Applying Pattern
 
 ## PLink do not change hosts file.
-PLink uses local proxy to switch over dev env so that there is no need for changing hosts file and restaring web browser respectively. 
+PLink uses local proxy to switch over dev env so that there is no need for changing hosts file and restarting web browser respectively. 

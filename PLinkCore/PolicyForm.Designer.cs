@@ -136,7 +136,7 @@ namespace PLinkCore
 			this.cbType.Location = new System.Drawing.Point(67, 5);
 			this.cbType.Name = "cbType";
 			this.cbType.Size = new System.Drawing.Size(121, 20);
-			this.cbType.TabIndex = 4;
+			this.cbType.TabIndex = 1;
 			// 
 			// textPattern
 			// 
@@ -145,7 +145,7 @@ namespace PLinkCore
 			this.textPattern.Location = new System.Drawing.Point(67, 33);
 			this.textPattern.Name = "textPattern";
 			this.textPattern.Size = new System.Drawing.Size(438, 21);
-			this.textPattern.TabIndex = 5;
+			this.textPattern.TabIndex = 2;
 			// 
 			// textDesc
 			// 
@@ -154,7 +154,7 @@ namespace PLinkCore
 			this.textDesc.Location = new System.Drawing.Point(67, 89);
 			this.textDesc.Name = "textDesc";
 			this.textDesc.Size = new System.Drawing.Size(438, 21);
-			this.textDesc.TabIndex = 7;
+			this.textDesc.TabIndex = 4;
 			// 
 			// tableLayoutPanel3
 			// 
@@ -179,7 +179,7 @@ namespace PLinkCore
 			this.textChange.Location = new System.Drawing.Point(3, 3);
 			this.textChange.Name = "textChange";
 			this.textChange.Size = new System.Drawing.Size(395, 21);
-			this.textChange.TabIndex = 6;
+			this.textChange.TabIndex = 3;
 			// 
 			// button3
 			// 
@@ -187,7 +187,7 @@ namespace PLinkCore
 			this.button3.Location = new System.Drawing.Point(404, 3);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(37, 21);
-			this.button3.TabIndex = 7;
+			this.button3.TabIndex = 5;
 			this.button3.Text = "...";
 			this.button3.UseVisualStyleBackColor = true;
 			// 
@@ -220,7 +220,7 @@ namespace PLinkCore
 			this.button2.Location = new System.Drawing.Point(3, 3);
 			this.button2.Name = "button2";
 			this.button2.Size = new System.Drawing.Size(75, 29);
-			this.button2.TabIndex = 1;
+			this.button2.TabIndex = 6;
 			this.button2.Text = "Save";
 			this.button2.UseVisualStyleBackColor = false;
 			this.button2.Click += new System.EventHandler(this.Button2Click);
@@ -232,7 +232,7 @@ namespace PLinkCore
 			this.button1.Location = new System.Drawing.Point(84, 3);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 29);
-			this.button1.TabIndex = 0;
+			this.button1.TabIndex = 7;
 			this.button1.Text = "Close";
 			this.button1.UseVisualStyleBackColor = true;
 			// 

@@ -68,6 +68,7 @@
     <Compile Include="HostType.cs">
       <DependentUpon>HostData.cs</DependentUpon>
     </Compile>
+    <Compile Include="MimeType.cs" />
     <Compile Include="PLink.cs" />
     <Compile Include="PLinkApi.cs">
       <DependentUpon>PLink.cs</DependentUpon>

@@ -154,8 +154,9 @@ namespace PLink
 			// 패턴 체크를 하고 
 			if (patternCheck != null && patternCheck.Checked) {
 				// 패턴이 체크 되어 있으면 , fullUrl 을 바꾸고 
-				checkUrlType(patternCheck, oSession);
+				bool isCheck = checkUrlType(patternCheck, oSession);
 				
+				if (!isCheck) return;
 				//return;
 			}
 			
@@ -188,14 +189,76 @@ namespace PLink
 				}
 			}
 		}
+		
+		void sendResponse(Session oSession, int code, string content_type, byte[] data) {
+			oSession.oResponse.headers.HTTPResponseCode = code;
+			
+			string status = "200 OK";
+			
+			if (code == 404) { 
+				status = "404 Not Found";	
+			}
+			
+			oSession.oResponse.headers.HTTPResponseStatus = status;
+			
+			oSession.oResponse.headers["Content-Type"] = content_type;
+			//oSession.oResponse.headers["Content-Length"] = data.Length.ToString();
+			
+			log(data.ToString());
+			
+			oSession.ResponseBody = data;
+		}		
 
 		// 패턴 체크 실행
-		void checkUrlType(HostCheck patternCheck, Session oSession)
+		bool checkUrlType(HostCheck patternCheck, Session oSession)
 		{
 			if (oSession.HTTPMethodIs("CONNECT")) {
 				oSession.hostname = patternCheck.afterHost();
+				
+				return true;
 			} else {
-				oSession.fullUrl = patternCheck.afterUrl(oSession.fullUrl);
+				
+				if (patternCheck.isFolder()) { 
+					string url = oSession.fullUrl;
+					int idx = url.LastIndexOf(patternCheck.Before);
+					
+					string first = url.Substring(0, idx);
+					string second = patternCheck.Before;
+					string last = url.Replace(first, "").Replace(second, "");
+					
+					log(first + " : " + second + " : " + last);
+					
+					// 기본 디렉토리 지정 
+					if (last.Equals("/")) { 
+						last = "/index.html";	
+					}
+					
+					oSession.utilCreateResponseAndBypassServer();
+					FileInfo file = new FileInfo(patternCheck.After + last);
+					
+					if (file.Exists) { 
+						string content_type = MimeType.Get(file.Extension);
+						byte[] data = File.ReadAllBytes(file.FullName);
+						
+						sendResponse(oSession, 200, content_type, data);
+						
+					} else { 
+					
+						byte[] data = Encoding.ASCII.GetBytes(@"PLink Server. HTTP/404 Not Found");
+
+						sendResponse(oSession, 200, "text/html", data);
+						
+					}
+					
+					return false; 
+					
+					
+				} else { 				
+					oSession.fullUrl = patternCheck.afterUrl(oSession.fullUrl);
+					
+					return true; 
+				}
+				
 			}
 		}
 

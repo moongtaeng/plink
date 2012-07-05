@@ -127,5 +127,18 @@ namespace PLinkCore
 				Description = item.Message;
 			}
 		}
+		
+		void SearchBtnClick(object sender, EventArgs e)
+		{
+			using (FolderBrowserDialog dialog = new FolderBrowserDialog()) { 
+				dialog.Description = "Open folder for Document Root";
+				
+				if (dialog.ShowDialog() == DialogResult.OK) { 
+					string folder = dialog.SelectedPath;
+					
+					Change = folder;
+				}
+			}
+		}
 	}
 }

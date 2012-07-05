@@ -7,6 +7,7 @@
  * 이 템플리트를 변경하려면 [도구->옵션->코드 작성->표준 헤더 편집]을 이용하십시오.
  */
 using System;
+using System.IO;
 
 namespace PLinkCore
 {
@@ -22,12 +23,20 @@ namespace PLinkCore
 			message = "default";			
 		}
 		
+		
+		
 		public HostCheck(bool Checked, int type, string Before, string After) {
 			this.type = type;
 			this.Checked = Checked;
 			this.Before = Before;
 			this.After = After;
 		}
+		
+		public bool isFolder() { 
+			DirectoryInfo dir = new DirectoryInfo(After);
+			
+			return dir.Exists;
+		}		
 		
         public bool isUrl() { 
         	return (type == 2);

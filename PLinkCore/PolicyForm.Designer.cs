@@ -46,7 +46,7 @@ namespace PLinkCore
 			this.textDesc = new System.Windows.Forms.TextBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.textChange = new System.Windows.Forms.TextBox();
-			this.button3 = new System.Windows.Forms.Button();
+			this.searchBtn = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.button2 = new System.Windows.Forms.Button();
@@ -162,7 +162,7 @@ namespace PLinkCore
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.41096F));
 			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.589041F));
 			this.tableLayoutPanel3.Controls.Add(this.textChange, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.button3, 1, 0);
+			this.tableLayoutPanel3.Controls.Add(this.searchBtn, 1, 0);
 			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel3.Location = new System.Drawing.Point(64, 58);
 			this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -181,15 +181,16 @@ namespace PLinkCore
 			this.textChange.Size = new System.Drawing.Size(395, 21);
 			this.textChange.TabIndex = 3;
 			// 
-			// button3
+			// searchBtn
 			// 
-			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button3.Location = new System.Drawing.Point(404, 3);
-			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(37, 21);
-			this.button3.TabIndex = 5;
-			this.button3.Text = "...";
-			this.button3.UseVisualStyleBackColor = true;
+			this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.searchBtn.Location = new System.Drawing.Point(404, 3);
+			this.searchBtn.Name = "searchBtn";
+			this.searchBtn.Size = new System.Drawing.Size(37, 21);
+			this.searchBtn.TabIndex = 5;
+			this.searchBtn.Text = "...";
+			this.searchBtn.UseVisualStyleBackColor = true;
+			this.searchBtn.Click += new System.EventHandler(this.SearchBtnClick);
 			// 
 			// groupBox1
 			// 
@@ -274,7 +275,7 @@ namespace PLinkCore
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button searchBtn;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.Button button1;

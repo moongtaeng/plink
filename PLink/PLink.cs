@@ -191,6 +191,7 @@ namespace PLink
 		}
 		
 		void sendResponse(Session oSession, int code, string content_type, byte[] data) {
+			oSession.utilCreateResponseAndBypassServer();			
 			oSession.oResponse.headers.HTTPResponseCode = code;
 			
 			string status = "200 OK";
@@ -228,12 +229,12 @@ namespace PLink
 					
 					log(first + " : " + second + " : " + last);
 					
-					// 기본 디렉토리 지정 
-					if (last.Equals("/")) { 
+					if (string.IsNullOrEmpty(last) || last.Equals("/")) {
 						last = "/index.html";	
 					}
 					
-					oSession.utilCreateResponseAndBypassServer();
+					
+
 					FileInfo file = new FileInfo(patternCheck.After + last);
 					
 					if (file.Exists) { 

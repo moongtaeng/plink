@@ -97,6 +97,7 @@ namespace PLink
 		}
 		
 		void sendResponse(Session oSession, int code, string content_type, byte[] data) {
+			oSession.utilCreateResponseAndBypassServer();			
 			oSession.oResponse.headers.HTTPResponseCode = code;
 			
 			string status = "200 OK";
@@ -138,7 +139,6 @@ namespace PLink
 						last = "/index.html";	
 					}
 					
-					oSession.utilCreateResponseAndBypassServer();
 					FileInfo file = new FileInfo(patternCheck.After + last);
 					
 					if (file.Exists) { 

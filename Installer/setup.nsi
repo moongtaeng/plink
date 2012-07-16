@@ -2,8 +2,8 @@
 
 ; HM NIS Edit Wizard helper defines
 !define PRODUCT_NAME "PLink"
-!define UPDATE_VERSION "1.1.0.0"
-!define PRODUCT_VERSION "1.1.0.0"
+!define UPDATE_VERSION "1.4.0.0"
+!define PRODUCT_VERSION "1.4.0.0"
 !define PRODUCT_WEB_SITE "http://github.com/"
 !define PRODUCT_DIR_REGKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\PLink.exe"
 !define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
@@ -66,27 +66,6 @@ FunctionEnd
 
 Function checkpreinstall
 
-	ReadRegStr $0 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "DisplayName"
-	StrCmp $0 "" preinstallFalse preinstallTrue
-	preinstallFalse:
-		goto end
-	preinstallTrue:
-		MessageBox MB_YESNO "${PRODUCT_NAME} 클라이언트가 이미 설치되어 있습니다. 기존 버전의 클라이언트를 삭제하고 새 버전을 설치합니다." IDYES true IDNO false
-		false:
-			MessageBox MB_OK "이전 버전의 클라이언트를 제거하지 않으면 새 버전을 설치할 수 없습니다."
-			Quit
-		true:	
-			StrCpy $R3 "$INSTDIR"
-			ReadRegStr $R1 ${PRODUCT_UNINST_ROOT_KEY} "${PRODUCT_UNINST_KEY}" "UninstallString"
-		
-			ExecWait '"$R1" /S'
-			MessageBox MB_YESNO "이전 버전의 클라이언트가 제거되었습니다. 새 버전 인스톨을 계속하시겠습니까?" IDYES deletetemp IDNO stop
-				stop:
-					Quit
-				deletetemp:
-					DetailPrint "삭제가 완료되었습니다. : $R2"
-					StrCpy "$INSTDIR" $R3
-	end:
 Functionend
 
 Section "PLink" SEC01

@@ -39,6 +39,9 @@ namespace PLinkCore
         public virtual void OnLoad()
         {
 
+        	// 실행위치 설정 
+        	PLink.host.AppName = getAppName();        	
+
         	// 트레이 메뉴에 PLink Remote 추가 
         	ContextMenuStrip menu = getMenuStrip();
         	
@@ -81,18 +84,21 @@ namespace PLinkCore
 	        	
         	// UI 초기화 및 프로그램 초기화 
             initializeUI();
+            
+            // URL 설정 
+			PLink.host.VersionUrl = Util.getDefaultPref("URL", "version", Util.VERSION_URL);
+			PLink.host.NoticeUrl = Util.getDefaultPref("URL", "notice", Util.NOTICE_URL);            
 
             // UI 설정 로드  
         	hostTab.OnLoad();
 
-        	// 실행위치 설정 
-        	PLink.host.AppName = getAppName();
         	
         	// 업데이트 체크 
 			System.Version version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 			string version_text = version.ToString();        	
 
         	PLink.host.Version = version_text;
+        	PLink.host.UpdateVersion = Util.checkVersion(PLink.host.Version);        	
         }
         
         /**
@@ -146,6 +152,11 @@ namespace PLinkCore
 		 * 
 		 */
 		public PLinkApiType router(string path) { 
+			// 메인 페이지 
+			if (path.StartsWith("/main")) { 
+				return PLinkApi.html(PLinkApi.MainIndex());
+			}
+			
 			// 리모콘 페이지 
 			if (path.StartsWith("/view")) { 
 				return PLinkApi.html(PLinkApi.ViewIndex());
@@ -155,6 +166,16 @@ namespace PLinkCore
 			if (path.StartsWith("/plink/state")) { 
 				return PLinkApi.json("{ \"result\" : "+ ( host.StartState ? "true" : "false" ) +" } ");
 			}
+			
+			// 정책리스트, 개발자 리스트 리로드 
+			if (path.StartsWith("/reload")) { 
+				hostTab.loadWebData();
+			}
+
+			// 즐겨찾기 리스트 
+			if (path.StartsWith("/policy/list/bookmark")) { 
+				return PLinkApi.html(PLinkApi.BookmarkListOption(PLinkApi.apiBookmarkList(), host.SelectBookmarkIndex));
+			}			
 			
 			// 파일 리스트 
 			if (path.StartsWith("/policy/list/local")) { 
@@ -179,11 +200,21 @@ namespace PLinkCore
 			// 개별 리스트 선택 
 			if (path.StartsWith("/select")) { 
 				int ilen = 0;
-				if (int.TryParse(path.Replace("/select/local/", ""), out ilen)) {
+				// 웹 정책 선택 
+				if (int.TryParse(path.Replace("/select/web/", ""), out ilen)) { 
+					hostTab.SelectWebIndex = ilen;
+					return PLinkApi.json("{ \"result\" : \"success\", \"type\" : \"web\" } ");
+				} 
+				// 파일 정책 선택 
+				else if (int.TryParse(path.Replace("/select/local/", ""), out ilen)) {
 					hostTab.SelectLocalIndex = ilen;
 					return PLinkApi.json("{ \"result\" : \"success\", \"type\" : \"local\" } ");	
 				} 
-		
+				// 북마크 선택 
+				else if (int.TryParse(path.Replace("/select/bookmark/", ""), out ilen)) {
+					hostTab.SelectBookmarkIndex = ilen;
+					return PLinkApi.json("{ \"result\" : \"success\", \"type\" : \"bookmark\" } ");						
+				}				
 				
 				return PLinkApi.json("{ \"result\" : \"error\" } ");
 			}

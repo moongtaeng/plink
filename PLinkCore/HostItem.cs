@@ -79,6 +79,15 @@ namespace PLinkCore
 	    	return (type == 4);
 	    }
 	    
+	    public bool isSaveHost() { 
+	    	if (isUrl() || isPattern()) return false;
+			if (!Checked) return false;
+				
+			if (isReal()) return true;
+				
+			return false;
+	    }	    
+	    
 	    public override string ToString() { 
 	    	StringBuilder sb = new StringBuilder();
 	    	

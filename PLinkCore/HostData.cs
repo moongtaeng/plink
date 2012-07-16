@@ -28,9 +28,8 @@ namespace PLinkCore
 		public const int ERROR_OPEN_FILE = -1;
 		public const int OK = 1;	
 		
-		private const string WEB_POLICY_DIR = "http://policy.nwz.kr/policy/list?site=all";
-		private const string WEB_POLICY_FILE = "http://policy.nwz.kr/policy/get?pcy=";
-		private const string WEB_DEV_DIR = "http://policy.nwz.kr/policy/developer_list";
+		private const string WEB_POLICY_DIR = "http://neowizgames.github.com/plink/list.html";
+		private const string WEB_POLICY_FILE = "http://neowizgames.github.com/plink/get?pcy=";
 		
 		private ArrayList titleList;
 		private Dictionary<string, HostItem> list;
@@ -39,8 +38,6 @@ namespace PLinkCore
 		private ArrayList fileList;
 		private ArrayList webList;		
 		private ArrayList customList;	
-		private ArrayList devList;
-		private Dictionary<string, string[]> rootList;
 		
 		
 		
@@ -50,19 +47,19 @@ namespace PLinkCore
 		 */ 
 		private bool _isStart;
 		private int _current;
-		private int _devIndex = -1;
-		private int _rootIndex = -1;
 		private int _webIndex = -1;
 		private int _localIndex = -1;
 		private int _bookmarkIndex = -1;
-		private string _userid;
-		private bool _isScriptFilter;
 		private bool _isHttpsFilter;
 		private string _rootDir;
 		private string _version;
+		private string _versionUrl;
+		private string _noticeUrl;			
 		private string _updateVersion;
 		private string _appName;
 		private string _headerEncoding = "UTF-8";
+		private string _web_policy_dir;
+		private string _web_policy_file;		
 		private bool _autoStart = false;
 		
 		
@@ -73,11 +70,9 @@ namespace PLinkCore
             fileList = new ArrayList();
             webList = new ArrayList();
             customList = new ArrayList();
-            devList = new ArrayList();
             titleList = new ArrayList();
             patternList = new Dictionary<string, string>();
             hostListTable = new Dictionary<string, string>();
-            rootList = new Dictionary<string, string[]>();
 		}
 		
 		/**
@@ -105,7 +100,11 @@ namespace PLinkCore
 		 */
 		public string POLICY_DIR { 
 			get { 
-				return WEB_POLICY_DIR;
+				if (string.IsNullOrEmpty(_web_policy_dir)) { 
+					_web_policy_dir = Util.getDefaultPref("URL", "policy", WEB_POLICY_DIR);
+				}
+				
+				return _web_policy_dir;
 			}
 		}
 		
@@ -115,20 +114,14 @@ namespace PLinkCore
 		 */ 
 		public string POLICY_FILE { 
 			get { 
-				return WEB_POLICY_FILE;				
+				if (string.IsNullOrEmpty(_web_policy_file)) { 
+					_web_policy_file = Util.getDefaultPref("URL", "policy_data", WEB_POLICY_FILE);
+				}
+				
+				return _web_policy_file;		
 			}
 		}
 		
-		/**
-		 * 개발자 리스트 
-		 * 
-		 */ 
-		public string DEV_DIR { 
-			get { 
-				return WEB_DEV_DIR;
-			}
-		}
-
 		public string AppName { 
 			get { return _appName; }
 			set { _appName = value; }
@@ -144,25 +137,21 @@ namespace PLinkCore
 			set { _version = value; }
 		}
 		
-		public string UserId { 
-			get { return _userid; } 
-			set { _userid = value; } 
+		public string VersionUrl { 
+			get { return _versionUrl; }
+			set { _versionUrl = value; }
 		}
 		
-		public int SelectDevIndex { 
-			get { return _devIndex; }
-			set { _devIndex = value; }
-		}		
+		public string NoticeUrl { 
+			get { return _noticeUrl; }
+			set { _noticeUrl = value; }
+		}			
+		
 
 		public int SelectBookmarkIndex { 
 			get { return _bookmarkIndex; }
 			set { _bookmarkIndex = value; }
 		}	
-		
-		public int SelectRootIndex { 
-			get { return _rootIndex; }
-			set { _rootIndex = value; }
-		}				
 		
 		public int SelectWebIndex { 
 			get { return _webIndex;  }
@@ -178,12 +167,6 @@ namespace PLinkCore
 			get { return _isStart; }
 			set { _isStart = value; }
 		}		
-		
-		[CategoryAttribute("PLink 설정"),DescriptionAttribute("스크립트 필터 적용")]
-		public bool isScriptFilter { 
-			get { return _isScriptFilter; }
-			set { _isScriptFilter = value;	}
-		}
 		
 		[CategoryAttribute("PLink 설정"),DescriptionAttribute("Https 필터 적용")]
 		public bool isHttpsFilter { 
@@ -243,42 +226,6 @@ namespace PLinkCore
 		// real time load 
 		public void loadHttp(string policy) { 
 			loadHttp(POLICY_FILE + policy, false);
-		}
-		
-		public void loadDevList() { 
-			devList.Clear();
-			rootList.Clear();
-			ArrayList list = Util.getHttpData(WEB_DEV_DIR);
-			
-			
-			foreach(string dev in list)  { 
-				string Key = string.Empty;
-				string Value = string.Empty;
-				string root = string.Empty;
-				
-				if (dev.IndexOf(Util.DELIMITER_DEV) > -1) { 
-					string[] dev_list = dev.Split(Util.DELIMITER_DEV);
-					
-					if (string.IsNullOrEmpty(dev_list[1])) {
-						Key = dev_list[0];
-						Value = dev_list[0];
-					} else { 
-						Key = dev_list[1] + " (" + dev_list[0] + ")";
-						Value = dev_list[0];
-					}
-					
-					if (dev_list.Length > 2) { 
-						root = dev_list[2];
-					}
-					
-				} else { 
-					Key = dev;
-					Value = dev;							
-				}
-				
-				devList.Add(new KeyValuePair<string, string>(Key, Value));
-				rootList.Add(Value, root.Split(Util.DELIMITER_ROOT));
-			}
 		}
 		
 		//
@@ -346,18 +293,6 @@ namespace PLinkCore
 			return fileList;	
 		}
 		
-		public ArrayList getDevList() { 
-			return devList;	
-		}
-		
-		public string[] getRootList(string key) {
-			if (rootList.ContainsKey(key)) { 
-				return rootList[key];
-			}
-			
-			return new string[] { };
-		}
-		
 		public ArrayList getTitleList() { 
 			return titleList;	
 		}
@@ -368,14 +303,26 @@ namespace PLinkCore
 		
 		public ArrayList getData() { 
 			ArrayList temp = new ArrayList();
+			ArrayList tempPattern = new ArrayList();
 			
 			foreach(KeyValuePair<string, HostItem> item in list) { 
 				temp.Add(item);
+				
+				if (item.Value.isPattern()) { 
+					tempPattern.Add(item);
+				}
 			}
 			
 			temp.Sort(new HostSorter());
+			tempPattern.Sort(new HostSorter());
 			
-			return temp;	
+			patternList.Clear();
+			
+			foreach(KeyValuePair<string, HostItem> item in tempPattern) { 
+				patternList[item.Value.Before] = item.Value.After;
+			}
+			
+			return temp;		
 		}
 		
 		public void refreshHost(string key, bool state) { 
@@ -428,6 +375,54 @@ namespace PLinkCore
 			
 			return hostname;
 		}  		
+		
+		
+        public void changeHostFile() { 
+
+			try {         	
+				
+				if (!Util.canModifyHosts()) return; 
+				
+				if (list == null) return;
+				
+				StringBuilder sb = new StringBuilder();
+				foreach(KeyValuePair<string, HostItem> item in list) { 
+					if (!item.Value.isSaveHost()) continue;
+
+					string temp_host = getIp(item.Value.After);
+					if (string.IsNullOrEmpty(temp_host)) {
+						sb.Append(Util.DELIMITER_INFO);
+					}
+					sb.Append(temp_host).Append("\t\t\t\t\t").AppendLine(item.Value.Before);
+				}
+	
+				string text = "\r\n### PLink Host Policy ###\r\n" +  sb.ToString();				
+				
+        		File.WriteAllText(HOST_ROOT + Util.HOST_SOURCE, text);
+        	} catch (Exception ex) { 
+				System.Diagnostics.Debug.WriteLine(ex.Message);
+        	}
+        }  
+		
+		public void initHostFile() { 
+			if (!Util.canModifyHosts()) return; 			
+			
+			File.WriteAllText(HOST_ROOT + Util.HOST_SOURCE, "");
+			File.WriteAllText(HOST_ROOT + Util.HOST_TARGET, "");
+			
+			this.changeHostFile();
+		}
+		
+        
+        public void rollbackHostFile() { 
+			if (!Util.canModifyHosts()) return; 			
+			
+        	try { 
+       			File.Copy(HOST_ROOT + Util.HOST_TARGET, HOST_ROOT + Util.HOST_SOURCE, true);
+        	} catch (Exception ex) { 
+				System.Diagnostics.Debug.WriteLine(ex.Message);
+        	}
+        }   		
 		
 		/**
 		 * 현재는 패턴 체크를 하나만 하도록 되어 있음 
@@ -484,6 +479,16 @@ namespace PLinkCore
 			return null;
 		}
 		
+		public void backupHostFile()
+		{
+			if (!Util.canModifyHosts()) return; 						
+        	try { 
+       			File.Copy(HOST_ROOT + Util.HOST_SOURCE, HOST_ROOT + Util.HOST_TARGET, true);
+        	} catch (Exception ex) { 
+				System.Diagnostics.Debug.WriteLine(ex.Message);
+        	}
+		}		
+		
 		public bool export(string path)
 		{
 			StringBuilder sb = new StringBuilder();
@@ -504,6 +509,19 @@ namespace PLinkCore
 				return false; 
 			}
 		}
+		
+		public void setBookmark(string key, string value)
+		{
+			Util.setBookmark(key,value);
+		}
+		
+		public void deleteBookmark(string key)  { 
+			Util.deleteBookmark(key);
+		}
+		
+		public ArrayList getBookmarkList() {
+			return Util.getBookmarkList();
+		}		
 
 	}
 

@@ -140,5 +140,30 @@ namespace PLinkCore
 				}
 			}
 		}
+		
+		void CbHttpStatusSelectedIndexChanged(object sender, EventArgs e)
+		{
+			ComboBox cb = (ComboBox)sender;
+			string status = cb.Items[cb.SelectedIndex].ToString();
+			Change = "status@" + status;
+			
+			if (status.Equals("200")) { 
+				msgHttp.Text = "OK";
+			} else if (status.Equals("404")) { 
+				msgHttp.Text = "Not Found";
+			} else if (status.Equals("403")) { 
+				msgHttp.Text = "Forbidden";
+			} else if (status.Equals("500")) { 
+				msgHttp.Text = "Server Error";
+			}
+		}
+		
+		void SearchFileClick(object sender, EventArgs e)
+		{
+			openFileDialog1.Title = "Open file for target url";
+			if (openFileDialog1.ShowDialog() == DialogResult.OK) { 
+				Change = openFileDialog1.FileName;
+			}
+		}
 	}
 }

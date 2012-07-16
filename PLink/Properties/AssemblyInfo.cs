@@ -9,11 +9,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PLinkCore")]
+[assembly: AssemblyTitle("PLink")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("PLinkCore")]
+[assembly: AssemblyProduct("PLink")]
 [assembly: AssemblyCopyright("Copyright 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -30,14 +30,36 @@ namespace PLinkCore
 		private PLink plink;
 		private ItemCheckEventHandler checkHandler;
 		
+		private void SetWebIndex(int i) { 
+			cbWebPolicy.SelectedIndex = i;	
+		}
+		
 		private void SetLocalIndex(int i) { 
 			cbLocalPolicy.SelectedIndex = i;	
 		}
+		
+		private void SetBookmarkIndex(int i) { 
+			bookmarkList.SelectedIndex = i;	
+		}						
 		
 		private void SetStartStateValue(bool value) { 
 			checkBox2.Checked = value;
 		}		
 		
+		public int SelectBookmarkIndex { 
+			
+			set { 
+				SetPolicyIndex d = new SetPolicyIndex(SetBookmarkIndex);
+				this.Invoke(d, new object[] { value });
+			}
+		}			
+		
+		public int SelectWebIndex { 
+			set { 
+				SetPolicyIndex d = new SetPolicyIndex(SetWebIndex);
+				this.Invoke(d, new object[] { value });
+			}
+		}
 		public int SelectLocalIndex { 
 			set { 
 				SetPolicyIndex d = new SetPolicyIndex(SetLocalIndex);
@@ -103,6 +125,8 @@ namespace PLinkCore
 		void Button2Click(object sender, EventArgs e)
 		{
 			listView1.Focus();
+			openFileDialog1.Filter = Util.DIALOG_FILTER;
+			openFileDialog1.Title = Util.DIALOG_TITLE;
 			if (openFileDialog1.ShowDialog() == DialogResult.OK) { 
 		
 				Stream stream = openFileDialog1.OpenFile();
@@ -125,7 +149,7 @@ namespace PLinkCore
 		
 
 		
-		private void reloadListView(ArrayList list) { 
+		private void reloadListView(ArrayList list) { 	
 			listView1.ItemCheck -= checkHandler;
 			listView1.Items.Clear();
 			//log("********************** reload list view start");
@@ -185,8 +209,10 @@ namespace PLinkCore
 			PLink.host.StartState = cb.Checked; 			
 			if (cb.Checked) { 
 				cb.Text = Util.BTN_END;
+				cb.BackColor = Color.RosyBrown;
 			} else { 
 				cb.Text = Util.BTN_START;
+				cb.BackColor = Color.Empty;
 			}
 
 			OnStart(cb, e);
@@ -194,14 +220,93 @@ namespace PLinkCore
 
 		// call by fiddler 
 		public void OnLoad() { 
-			plink.initCapture();
+			msgAdmin.Visible = !Util.canModifyHosts();
+			
+			bool running = Util.getPrefBool(Util.REG_KEY_RUNNING);
+			
+			// 비정상 종료 , running 변수가 남아있으면 비정상 종료 체크 하시오.
+			if (running) { 
+				PLink.host.initHostFile();
+				plink.initCapture();
+			}
+			
+			PLink.host.backupHostFile();
+			
+			bool auto = Util.getPrefBool(Util.REG_KEY_AUTO);			
+			bool start = Util.getPrefBool(Util.REG_KEY_START);
+			int current = Util.getPrefInt(Util.REG_KEY_CURRENT_POLICY);
+			int web_select = Util.getPrefInt(Util.REG_KEY_WEB_POLICY_SELECT);
+			string local_path = Util.getPref(Util.REG_KEY_LOCAL_POLICY_PATH); 
+			
+			try { 
+				PLink.host.Current = current;
+				
+				// regist setting load 
+				loadWebData();
+				
+				autoStart.Checked = auto;
+				
+				if (autoStart.Checked) { 
+					changeStatus(current);
+					
+					if (Util.isWeb(current)) {
+						
+						if (web_select > -1) {
+							cbWebPolicy.SelectedIndex = web_select;
+						}				
+						
+						if (!string.IsNullOrEmpty(local_path)) {
+							loadLocalData(local_path);
+						}
+						
+					} else if (Util.isFile(current)) {
+						if (!string.IsNullOrEmpty(local_path)) {
+							loadLocalData(local_path, true);
+						}
+					}
+					
+					// set start button 
+					checkBox2.Checked = start;
+				}
+			} catch (Exception ex) { 
+				log(ex.Message);
+			}
+			
+			Util.setPrefBool(Util.REG_KEY_RUNNING, true);			
+
+			// 북마크 로드 
+			ArrayList bookmark = PLink.host.getBookmarkList();
+			
+			foreach(KeyValuePair<string, string> mark in bookmark) { 
+				bookmarkList.Items.Add(mark);
+			}
+
 		}
 		
 
 		
 		// call by fiddler 
 		public void OnUnload() { 
-			System.Diagnostics.Debug.WriteLine("unload");
+			PLink.host.rollbackHostFile();
+			Util.deletePref(Util.REG_KEY_RUNNING);
+			
+			// setting registry
+			if (autoStart.Checked) { 
+				Util.setPref(Util.REG_KEY_AUTO, 				true);
+				Util.setPref(Util.REG_KEY_START, 				PLink.host.StartState);
+				Util.setPref(Util.REG_KEY_WEB_POLICY_DIR, 		PLink.host.POLICY_DIR);			
+				Util.setPref(Util.REG_KEY_WEB_POLICY_SELECT, 	PLink.host.SelectWebIndex);
+				
+				Util.setPref(Util.REG_KEY_LOCAL_POLICY_PATH, 	(cbLocalPolicy.SelectedIndex > -1) ? ((KeyValuePair<string, string>)cbLocalPolicy.SelectedItem).Value : "");
+
+			} else { 
+				Util.setPref(Util.REG_KEY_AUTO, 				false);
+				Util.setPref(Util.REG_KEY_START, 				false);
+				Util.setPref(Util.REG_KEY_CURRENT_POLICY, 	0);			
+				Util.setPref(Util.REG_KEY_WEB_POLICY_DIR, 		string.Empty);			
+				Util.setPref(Util.REG_KEY_WEB_POLICY_SELECT, 0);				
+				Util.setPref(Util.REG_KEY_LOCAL_POLICY_PATH, 	string.Empty);
+			}
 		}
 		
 		void CheckHostState(object sender, ItemCheckEventArgs e)
@@ -394,7 +499,170 @@ namespace PLinkCore
 				}
 			}
 		}
+		
+		void WebPolicyButtonClick(object sender, EventArgs e)
+		{
+			cbWebPolicy.Focus();
+			int select = cbWebPolicy.SelectedIndex;
+			loadWebData();
+			cbWebPolicy.SelectedIndex = select;
+		}
+		
+		public void loadWebData() { 
+			PLink.host.loadPolicyList();
+			ArrayList list = PLink.host.getWebList();
+			
+			cbWebPolicy.Items.Clear();
+			foreach(string temp in list) { 
+				string[] temp_name = temp.Split(Util.DELIMITER_DEV);
+				KeyValuePair<string, string> obj = new KeyValuePair<string, string>(
+					temp_name[1].Equals(string.Empty) ? temp_name[0].Replace(HostItem.FILE_EXT, string.Empty) : temp_name[1], 
+					temp_name[0]
+				);
+				cbWebPolicy.Items.Add(obj);
+			}
+			
+		}		
+		
+		void CbWebPolicySelectedIndexChanged(object sender, EventArgs e)
+		{
+			//log("select host file");
+			ComboBox combo = (ComboBox)sender;
 
+			if (combo.SelectedIndex < 0) return;
+			
+			KeyValuePair<string, string> obj = (KeyValuePair<string, string>)combo.SelectedItem;
+			
+			if (string.IsNullOrEmpty(obj.Value)) return ;
+			
+			// 현재 상태 표시  (Web)
+			changeStatus(Util.TYPE_WEB,obj.Key);
+			
+			// HostData 로드 
+			PLink.host.loadHttp(obj.Value);
+			
+			// 리스트뷰 새로 고침 
+			reloadListView();
+
+			// 현재 선택된 index 설정 
+			PLink.host.SelectWebIndex = combo.SelectedIndex;	
+		}
+		
+		void BookmarkAddClick(object sender, EventArgs e)
+		{
+			int current = PLink.host.Current;
+			int index = -1;
+			string key = "";
+			string value = "";
+			
+			if (Util.isWeb(current)) { 
+				index = PLink.host.SelectWebIndex;
+				KeyValuePair<string, string> obj = (KeyValuePair<string, string>)cbWebPolicy.Items[index];
+				
+				key = string.Format("{0}", obj.Key);
+				value = string.Format("WEB|{0}", obj.Value);
+				
+			} else if (Util.isFile(current)) { 
+				index = PLink.host.SelectLocalIndex;
+				KeyValuePair<string, string> obj = (KeyValuePair<string, string>)cbLocalPolicy.Items[index];
+				
+				key = string.Format("{0}", obj.Key);
+				value = string.Format("LOCAL|{0}", obj.Value);
+			}
+			
+			// value 가 있는지 체크 
+			foreach(KeyValuePair<string, string> item in bookmarkList.Items) { 
+				if (item.Value.Equals(value)) { 
+					MessageBox.Show("Already exists bookmark.", "Alert");
+					return ; 					
+				}
+			}
+			
+			bookmarkList.Items.Add(new KeyValuePair<string, string>(key, value));
+			
+			log(key + " : " + value);
+			
+			// 레지스트리에 북마크 저장 
+			PLink.host.setBookmark(key, value);
+		}
+		
+		void ChooseBookmark() { 
+			ListBox lb = bookmarkList;
+			
+			if (lb.SelectedItem != null) { 
+				KeyValuePair<string, string> item = (KeyValuePair<string, string>)lb.SelectedItem;
+				
+				LoadBookmarkList(item.Value);
+				
+				PLink.host.SelectBookmarkIndex = lb.SelectedIndex;
+			}			
+		}
+		
+		// call by fiddler 
+		public void LoadBookmarkList(string value) { 
+			string[] temp = value.Split('|');
+			
+			if (temp[0].Equals("WEB")) { 
+				SelectComboBoxValue(cbWebPolicy, temp[1]);
+			} else if (temp[0].Equals("LOCAL")) { 
+				if (cbLocalPolicy.Items.Count > 0) { 
+					SelectComboBoxValue(cbLocalPolicy, temp[1]);
+				} else { 
+					loadLocalData(temp[1], true);	
+				}
+			}
+		}
+		
+						
+		
+		void BookmarkDelClick(object sender, EventArgs e)
+		{
+			if (bookmarkList.SelectedIndex < 0) { 
+				MessageBox.Show("Choose a bookmark.", "Alert");
+				return; 
+			}
+			
+			if (MessageBox.Show("Delete a selected bookmark?", "Alert", MessageBoxButtons.YesNo) == DialogResult.Yes) { 
+				KeyValuePair<string,string> item = (KeyValuePair<string,string>)bookmarkList.SelectedItem;
+				PLink.host.deleteBookmark(item.Key);
+				
+				bookmarkList.Items.RemoveAt(bookmarkList.SelectedIndex);
+			}
+		}
+		
+		void BtnInitHostClick(object sender, EventArgs e)
+		{
+			if (!Util.canModifyHosts()) { 
+				MessageBox.Show("You need Administrator Roll.", "Alert");
+				return;
+			}
+			PLink.host.initHostFile();
+		}
+		
+		void HostTabDragDrop(object sender, DragEventArgs e)
+		{
+			string[] s = (string[]) e.Data.GetData(DataFormats.FileDrop, false);
+
+			if (s.Length > 0)  { 
+				string fullpath = s[0];
+				
+				loadLocalData(fullpath, true);
+			}
+		}
+		
+		void HostTabDragEnter(object sender, DragEventArgs e)
+		{
+			if (e.Data.GetDataPresent(DataFormats.FileDrop)) { 
+				e.Effect = DragDropEffects.All;	
+			} else { 
+				e.Effect = DragDropEffects.None;	
+			}
+		}
+		
+		void BookmarkListSelectedIndexChanged(object sender, EventArgs e)
+		{
+			ChooseBookmark();
+		}
 	}
 
 }

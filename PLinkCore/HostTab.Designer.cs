@@ -56,11 +56,15 @@ namespace PLinkCore
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.settingGroups = new System.Windows.Forms.GroupBox();
+			this.msgAdmin = new System.Windows.Forms.Label();
+			this.webPolicyButton = new System.Windows.Forms.Button();
+			this.cbWebPolicy = new System.Windows.Forms.ComboBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.checkBox2 = new System.Windows.Forms.CheckBox();
-			this.cbHeaderEncoding = new System.Windows.Forms.ComboBox();
 			this.button2 = new System.Windows.Forms.Button();
-			this.label6 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
+			this.cbHeaderEncoding = new System.Windows.Forms.ComboBox();
+			this.label6 = new System.Windows.Forms.Label();
 			this.httpsFilter = new System.Windows.Forms.CheckBox();
 			this.label8 = new System.Windows.Forms.Label();
 			this.btnSave = new System.Windows.Forms.Button();
@@ -71,10 +75,21 @@ namespace PLinkCore
 			this.btnModify = new System.Windows.Forms.Button();
 			this.btnPlusPolicy = new System.Windows.Forms.Button();
 			this.btnDelete = new System.Windows.Forms.Button();
+			this.btnInitHost = new System.Windows.Forms.Button();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
 			this.label5 = new System.Windows.Forms.Label();
 			this.versionLabel = new System.Windows.Forms.Label();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.autoStart = new System.Windows.Forms.CheckBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+			this.bookmarkAdd = new System.Windows.Forms.Button();
+			this.bookmarkDel = new System.Windows.Forms.Button();
+			this.bookmarkList = new System.Windows.Forms.ListBox();
 			this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
 			this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
 			this.imageList2 = new System.Windows.Forms.ImageList(this.components);
@@ -86,6 +101,13 @@ namespace PLinkCore
 			this.flowLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.tableLayoutPanel3.SuspendLayout();
+			this.groupBox1.SuspendLayout();
+			this.splitContainer1.Panel1.SuspendLayout();
+			this.splitContainer1.Panel2.SuspendLayout();
+			this.splitContainer1.SuspendLayout();
+			this.groupBox2.SuspendLayout();
+			this.tableLayoutPanel2.SuspendLayout();
+			this.flowLayoutPanel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// cbLocalPolicy
@@ -95,16 +117,17 @@ namespace PLinkCore
 			this.cbLocalPolicy.Font = new System.Drawing.Font("굴림", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
 			this.cbLocalPolicy.FormattingEnabled = true;
 			this.cbLocalPolicy.IntegralHeight = false;
-			this.cbLocalPolicy.Location = new System.Drawing.Point(208, 24);
+			this.cbLocalPolicy.Location = new System.Drawing.Point(160, 56);
 			this.cbLocalPolicy.MaxDropDownItems = 50;
 			this.cbLocalPolicy.Name = "cbLocalPolicy";
-			this.cbLocalPolicy.Size = new System.Drawing.Size(278, 21);
+			this.cbLocalPolicy.Size = new System.Drawing.Size(240, 21);
 			this.cbLocalPolicy.TabIndex = 4;
 			this.cbLocalPolicy.ValueMember = "Value";
 			this.cbLocalPolicy.SelectedIndexChanged += new System.EventHandler(this.ComboBox2SelectedIndexChanged);
 			// 
 			// listView1
 			// 
+			this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.listView1.CheckBoxes = true;
 			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
 									this.columnHeader5,
@@ -121,7 +144,7 @@ namespace PLinkCore
 			this.listView1.Margin = new System.Windows.Forms.Padding(0);
 			this.listView1.MultiSelect = false;
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(828, 305);
+			this.listView1.Size = new System.Drawing.Size(558, 305);
 			this.listView1.SmallImageList = this.imageList1;
 			this.listView1.TabIndex = 6;
 			this.listView1.UseCompatibleStateImageBehavior = false;
@@ -155,27 +178,27 @@ namespace PLinkCore
 									this.hostDeleteItem});
 			this.contextMenuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(101, 70);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(115, 70);
 			// 
 			// hostModifyItem
 			// 
 			this.hostModifyItem.Name = "hostModifyItem";
-			this.hostModifyItem.Size = new System.Drawing.Size(100, 22);
-			this.hostModifyItem.Text = "수정";
+			this.hostModifyItem.Size = new System.Drawing.Size(152, 22);
+			this.hostModifyItem.Text = "Modify";
 			this.hostModifyItem.Click += new System.EventHandler(this.HostModifyItemClick);
 			// 
 			// hostAddItem
 			// 
 			this.hostAddItem.Name = "hostAddItem";
-			this.hostAddItem.Size = new System.Drawing.Size(100, 22);
-			this.hostAddItem.Text = "추가";
+			this.hostAddItem.Size = new System.Drawing.Size(152, 22);
+			this.hostAddItem.Text = "Add";
 			this.hostAddItem.Click += new System.EventHandler(this.HostAddItemClick);
 			// 
 			// hostDeleteItem
 			// 
 			this.hostDeleteItem.Name = "hostDeleteItem";
-			this.hostDeleteItem.Size = new System.Drawing.Size(100, 22);
-			this.hostDeleteItem.Text = "삭제";
+			this.hostDeleteItem.Size = new System.Drawing.Size(152, 22);
+			this.hostDeleteItem.Text = "Delete";
 			this.hostDeleteItem.Click += new System.EventHandler(this.HostDeleteItemClick);
 			// 
 			// imageList1
@@ -191,23 +214,63 @@ namespace PLinkCore
 			// settingGroups
 			// 
 			this.settingGroups.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-			this.tableLayoutPanel1.SetColumnSpan(this.settingGroups, 2);
+			this.settingGroups.Controls.Add(this.msgAdmin);
+			this.settingGroups.Controls.Add(this.webPolicyButton);
+			this.settingGroups.Controls.Add(this.cbWebPolicy);
+			this.settingGroups.Controls.Add(this.label1);
 			this.settingGroups.Controls.Add(this.checkBox2);
-			this.settingGroups.Controls.Add(this.cbHeaderEncoding);
 			this.settingGroups.Controls.Add(this.button2);
-			this.settingGroups.Controls.Add(this.label6);
 			this.settingGroups.Controls.Add(this.label2);
-			this.settingGroups.Controls.Add(this.httpsFilter);
 			this.settingGroups.Controls.Add(this.cbLocalPolicy);
-			this.settingGroups.Controls.Add(this.label8);
-			this.settingGroups.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.settingGroups.Location = new System.Drawing.Point(3, 3);
 			this.settingGroups.Name = "settingGroups";
 			this.settingGroups.Padding = new System.Windows.Forms.Padding(5);
-			this.settingGroups.Size = new System.Drawing.Size(848, 136);
+			this.settingGroups.Size = new System.Drawing.Size(473, 136);
 			this.settingGroups.TabIndex = 13;
 			this.settingGroups.TabStop = false;
 			this.settingGroups.Text = "Tools";
+			// 
+			// msgAdmin
+			// 
+			this.msgAdmin.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.msgAdmin.ForeColor = System.Drawing.Color.Maroon;
+			this.msgAdmin.Location = new System.Drawing.Point(80, 104);
+			this.msgAdmin.Name = "msgAdmin";
+			this.msgAdmin.Size = new System.Drawing.Size(384, 23);
+			this.msgAdmin.TabIndex = 18;
+			this.msgAdmin.Text = "You need Administrators access to change hosts file.";
+			this.msgAdmin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// webPolicyButton
+			// 
+			this.webPolicyButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+			this.webPolicyButton.Location = new System.Drawing.Point(408, 24);
+			this.webPolicyButton.Name = "webPolicyButton";
+			this.webPolicyButton.Size = new System.Drawing.Size(48, 24);
+			this.webPolicyButton.TabIndex = 17;
+			this.webPolicyButton.Text = "Load";
+			this.webPolicyButton.UseVisualStyleBackColor = true;
+			this.webPolicyButton.Click += new System.EventHandler(this.WebPolicyButtonClick);
+			// 
+			// cbWebPolicy
+			// 
+			this.cbWebPolicy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbWebPolicy.FormattingEnabled = true;
+			this.cbWebPolicy.Location = new System.Drawing.Point(160, 24);
+			this.cbWebPolicy.Name = "cbWebPolicy";
+			this.cbWebPolicy.Size = new System.Drawing.Size(240, 20);
+			this.cbWebPolicy.TabIndex = 16;
+			this.cbWebPolicy.SelectedIndexChanged += new System.EventHandler(this.CbWebPolicySelectedIndexChanged);
+			// 
+			// label1
+			// 
+			this.label1.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+			this.label1.Location = new System.Drawing.Point(104, 24);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(48, 23);
+			this.label1.TabIndex = 15;
+			this.label1.Text = "Web";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// checkBox2
 			// 
@@ -226,24 +289,12 @@ namespace PLinkCore
 			this.checkBox2.Location = new System.Drawing.Point(8, 24);
 			this.checkBox2.Name = "checkBox2";
 			this.checkBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-			this.checkBox2.Size = new System.Drawing.Size(96, 56);
+			this.checkBox2.Size = new System.Drawing.Size(72, 56);
 			this.checkBox2.TabIndex = 14;
 			this.checkBox2.Text = "▶ Start";
+			this.checkBox2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.checkBox2.UseVisualStyleBackColor = false;
 			this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox2CheckedChanged);
-			// 
-			// cbHeaderEncoding
-			// 
-			this.cbHeaderEncoding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbHeaderEncoding.FormattingEnabled = true;
-			this.cbHeaderEncoding.Items.AddRange(new object[] {
-									"UTF-8",
-									"EUC-KR"});
-			this.cbHeaderEncoding.Location = new System.Drawing.Point(208, 56);
-			this.cbHeaderEncoding.Name = "cbHeaderEncoding";
-			this.cbHeaderEncoding.Size = new System.Drawing.Size(72, 20);
-			this.cbHeaderEncoding.TabIndex = 26;
-			this.cbHeaderEncoding.SelectedIndexChanged += new System.EventHandler(this.CbHeaderEncodingSelectedIndexChanged);
 			// 
 			// button2
 			// 
@@ -254,42 +305,55 @@ namespace PLinkCore
 			this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
 			this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
 			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-			this.button2.Location = new System.Drawing.Point(488, 24);
+			this.button2.Location = new System.Drawing.Point(408, 56);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(42, 24);
+			this.button2.Size = new System.Drawing.Size(48, 24);
 			this.button2.TabIndex = 5;
 			this.button2.Text = "Find";
 			this.toolTip1.SetToolTip(this.button2, "파일 열기");
 			this.button2.UseVisualStyleBackColor = false;
 			this.button2.Click += new System.EventHandler(this.Button2Click);
 			// 
-			// label6
-			// 
-			this.label6.Location = new System.Drawing.Point(112, 56);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(87, 24);
-			this.label6.TabIndex = 25;
-			this.label6.Text = "Header Encoding";
-			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			// 
 			// label2
 			// 
 			this.label2.BackColor = System.Drawing.Color.Transparent;
 			this.label2.Font = new System.Drawing.Font("굴림", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-			this.label2.Location = new System.Drawing.Point(152, 24);
+			this.label2.Location = new System.Drawing.Point(104, 56);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(48, 23);
 			this.label2.TabIndex = 3;
-			this.label2.Text = "Rules";
+			this.label2.Text = "File";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// cbHeaderEncoding
+			// 
+			this.cbHeaderEncoding.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbHeaderEncoding.FormattingEnabled = true;
+			this.cbHeaderEncoding.Items.AddRange(new object[] {
+									"UTF-8",
+									"EUC-KR"});
+			this.cbHeaderEncoding.Location = new System.Drawing.Point(128, 56);
+			this.cbHeaderEncoding.Name = "cbHeaderEncoding";
+			this.cbHeaderEncoding.Size = new System.Drawing.Size(136, 20);
+			this.cbHeaderEncoding.TabIndex = 26;
+			this.cbHeaderEncoding.SelectedIndexChanged += new System.EventHandler(this.CbHeaderEncodingSelectedIndexChanged);
+			// 
+			// label6
+			// 
+			this.label6.Location = new System.Drawing.Point(8, 56);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(120, 24);
+			this.label6.TabIndex = 25;
+			this.label6.Text = "Header Encoding : ";
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// httpsFilter
 			// 
 			this.httpsFilter.Checked = true;
 			this.httpsFilter.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.httpsFilter.Location = new System.Drawing.Point(208, 88);
+			this.httpsFilter.Location = new System.Drawing.Point(128, 80);
 			this.httpsFilter.Name = "httpsFilter";
-			this.httpsFilter.Size = new System.Drawing.Size(215, 24);
+			this.httpsFilter.Size = new System.Drawing.Size(200, 24);
 			this.httpsFilter.TabIndex = 24;
 			this.httpsFilter.Text = "http://host:443 -> https://host ";
 			this.toolTip1.SetToolTip(this.httpsFilter, "피들러 자체 포로토콜 검증으로 인해서  \r\nhttp://host:443  형태로 들어오는 프로토콜에 대해서 인식을 못합니다.\r\n그래서  https" +
@@ -298,11 +362,11 @@ namespace PLinkCore
 			// 
 			// label8
 			// 
-			this.label8.Location = new System.Drawing.Point(112, 90);
+			this.label8.Location = new System.Drawing.Point(41, 80);
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(86, 23);
 			this.label8.TabIndex = 23;
-			this.label8.Text = "Http Filter";
+			this.label8.Text = "Http Filter : ";
 			this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// btnSave
@@ -326,13 +390,12 @@ namespace PLinkCore
 			// 
 			// hostGroups
 			// 
-			this.tableLayoutPanel1.SetColumnSpan(this.hostGroups, 2);
 			this.hostGroups.Controls.Add(this.hostTablePanel);
 			this.hostGroups.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.hostGroups.Location = new System.Drawing.Point(3, 145);
+			this.hostGroups.Location = new System.Drawing.Point(0, 0);
 			this.hostGroups.Name = "hostGroups";
 			this.hostGroups.Padding = new System.Windows.Forms.Padding(10);
-			this.hostGroups.Size = new System.Drawing.Size(848, 367);
+			this.hostGroups.Size = new System.Drawing.Size(578, 367);
 			this.hostGroups.TabIndex = 14;
 			this.hostGroups.TabStop = false;
 			this.hostGroups.Text = "Host List";
@@ -349,7 +412,7 @@ namespace PLinkCore
 			this.hostTablePanel.RowCount = 2;
 			this.hostTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
 			this.hostTablePanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.hostTablePanel.Size = new System.Drawing.Size(828, 333);
+			this.hostTablePanel.Size = new System.Drawing.Size(558, 333);
 			this.hostTablePanel.TabIndex = 7;
 			// 
 			// tableLayoutPanel4
@@ -364,7 +427,7 @@ namespace PLinkCore
 			this.tableLayoutPanel4.Name = "tableLayoutPanel4";
 			this.tableLayoutPanel4.RowCount = 1;
 			this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel4.Size = new System.Drawing.Size(828, 28);
+			this.tableLayoutPanel4.Size = new System.Drawing.Size(558, 28);
 			this.tableLayoutPanel4.TabIndex = 7;
 			// 
 			// flowLayoutPanel1
@@ -377,10 +440,11 @@ namespace PLinkCore
 			this.flowLayoutPanel1.Controls.Add(this.btnModify);
 			this.flowLayoutPanel1.Controls.Add(this.btnPlusPolicy);
 			this.flowLayoutPanel1.Controls.Add(this.btnDelete);
+			this.flowLayoutPanel1.Controls.Add(this.btnInitHost);
 			this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
 			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-			this.flowLayoutPanel1.Size = new System.Drawing.Size(828, 28);
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(558, 28);
 			this.flowLayoutPanel1.TabIndex = 8;
 			// 
 			// btnModify
@@ -437,14 +501,25 @@ namespace PLinkCore
 			this.btnDelete.UseVisualStyleBackColor = false;
 			this.btnDelete.Click += new System.EventHandler(this.BtnMinusPolicyClick);
 			// 
+			// btnInitHost
+			// 
+			this.btnInitHost.Location = new System.Drawing.Point(276, 3);
+			this.btnInitHost.Name = "btnInitHost";
+			this.btnInitHost.Size = new System.Drawing.Size(75, 23);
+			this.btnInitHost.TabIndex = 18;
+			this.btnInitHost.Text = "Initialize";
+			this.btnInitHost.UseVisualStyleBackColor = true;
+			this.btnInitHost.Click += new System.EventHandler(this.BtnInitHostClick);
+			// 
 			// tableLayoutPanel1
 			// 
 			this.tableLayoutPanel1.ColumnCount = 2;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 512F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 479F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Controls.Add(this.hostGroups, 0, 1);
-			this.tableLayoutPanel1.Controls.Add(this.settingGroups, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 2);
+			this.tableLayoutPanel1.Controls.Add(this.settingGroups, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.groupBox1, 1, 0);
+			this.tableLayoutPanel1.Controls.Add(this.splitContainer1, 0, 1);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -469,7 +544,7 @@ namespace PLinkCore
 			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
 			this.tableLayoutPanel3.RowCount = 1;
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(506, 26);
+			this.tableLayoutPanel3.Size = new System.Drawing.Size(473, 26);
 			this.tableLayoutPanel3.TabIndex = 16;
 			// 
 			// label5
@@ -491,6 +566,129 @@ namespace PLinkCore
 			this.versionLabel.TabIndex = 1;
 			this.versionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// groupBox1
+			// 
+			this.groupBox1.Controls.Add(this.autoStart);
+			this.groupBox1.Controls.Add(this.label4);
+			this.groupBox1.Controls.Add(this.cbHeaderEncoding);
+			this.groupBox1.Controls.Add(this.label6);
+			this.groupBox1.Controls.Add(this.httpsFilter);
+			this.groupBox1.Controls.Add(this.label8);
+			this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox1.Location = new System.Drawing.Point(482, 3);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(369, 136);
+			this.groupBox1.TabIndex = 17;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Options";
+			// 
+			// autoStart
+			// 
+			this.autoStart.Location = new System.Drawing.Point(128, 32);
+			this.autoStart.Name = "autoStart";
+			this.autoStart.Size = new System.Drawing.Size(200, 24);
+			this.autoStart.TabIndex = 28;
+			this.autoStart.Text = "save current options";
+			this.autoStart.UseVisualStyleBackColor = true;
+			this.autoStart.CheckedChanged += new System.EventHandler(this.AutoStartCheckedChanged);
+			// 
+			// label4
+			// 
+			this.label4.Location = new System.Drawing.Point(32, 32);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(96, 23);
+			this.label4.TabIndex = 27;
+			this.label4.Text = "State : ";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// splitContainer1
+			// 
+			this.tableLayoutPanel1.SetColumnSpan(this.splitContainer1, 2);
+			this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer1.Location = new System.Drawing.Point(3, 145);
+			this.splitContainer1.Name = "splitContainer1";
+			// 
+			// splitContainer1.Panel1
+			// 
+			this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
+			// 
+			// splitContainer1.Panel2
+			// 
+			this.splitContainer1.Panel2.Controls.Add(this.hostGroups);
+			this.splitContainer1.Size = new System.Drawing.Size(848, 367);
+			this.splitContainer1.SplitterDistance = 266;
+			this.splitContainer1.TabIndex = 18;
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.Controls.Add(this.tableLayoutPanel2);
+			this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.groupBox2.Location = new System.Drawing.Point(0, 0);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(266, 367);
+			this.groupBox2.TabIndex = 0;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Bookmark";
+			// 
+			// tableLayoutPanel2
+			// 
+			this.tableLayoutPanel2.ColumnCount = 1;
+			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel2, 0, 0);
+			this.tableLayoutPanel2.Controls.Add(this.bookmarkList, 0, 1);
+			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
+			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+			this.tableLayoutPanel2.RowCount = 2;
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43F));
+			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(260, 347);
+			this.tableLayoutPanel2.TabIndex = 0;
+			// 
+			// flowLayoutPanel2
+			// 
+			this.flowLayoutPanel2.Controls.Add(this.bookmarkAdd);
+			this.flowLayoutPanel2.Controls.Add(this.bookmarkDel);
+			this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+			this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+			this.flowLayoutPanel2.Size = new System.Drawing.Size(254, 37);
+			this.flowLayoutPanel2.TabIndex = 1;
+			// 
+			// bookmarkAdd
+			// 
+			this.bookmarkAdd.Location = new System.Drawing.Point(3, 3);
+			this.bookmarkAdd.Name = "bookmarkAdd";
+			this.bookmarkAdd.Size = new System.Drawing.Size(61, 29);
+			this.bookmarkAdd.TabIndex = 0;
+			this.bookmarkAdd.Text = "Add";
+			this.bookmarkAdd.UseVisualStyleBackColor = true;
+			this.bookmarkAdd.Click += new System.EventHandler(this.BookmarkAddClick);
+			// 
+			// bookmarkDel
+			// 
+			this.bookmarkDel.Location = new System.Drawing.Point(70, 3);
+			this.bookmarkDel.Name = "bookmarkDel";
+			this.bookmarkDel.Size = new System.Drawing.Size(75, 29);
+			this.bookmarkDel.TabIndex = 1;
+			this.bookmarkDel.Text = "Delete";
+			this.bookmarkDel.UseVisualStyleBackColor = true;
+			this.bookmarkDel.Click += new System.EventHandler(this.BookmarkDelClick);
+			// 
+			// bookmarkList
+			// 
+			this.bookmarkList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.bookmarkList.DisplayMember = "Key";
+			this.bookmarkList.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.bookmarkList.FormattingEnabled = true;
+			this.bookmarkList.ItemHeight = 12;
+			this.bookmarkList.Location = new System.Drawing.Point(3, 46);
+			this.bookmarkList.Name = "bookmarkList";
+			this.bookmarkList.Size = new System.Drawing.Size(254, 298);
+			this.bookmarkList.TabIndex = 2;
+			this.bookmarkList.ValueMember = "Value";
+			this.bookmarkList.SelectedIndexChanged += new System.EventHandler(this.BookmarkListSelectedIndexChanged);
+			// 
 			// imageList2
 			// 
 			this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
@@ -500,11 +698,14 @@ namespace PLinkCore
 			// 
 			// HostTab
 			// 
+			this.AllowDrop = true;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "HostTab";
 			this.Size = new System.Drawing.Size(854, 547);
+			this.DragDrop += new System.Windows.Forms.DragEventHandler(this.HostTabDragDrop);
+			this.DragEnter += new System.Windows.Forms.DragEventHandler(this.HostTabDragEnter);
 			this.contextMenuStrip1.ResumeLayout(false);
 			this.settingGroups.ResumeLayout(false);
 			this.hostGroups.ResumeLayout(false);
@@ -513,8 +714,30 @@ namespace PLinkCore
 			this.flowLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel3.ResumeLayout(false);
+			this.groupBox1.ResumeLayout(false);
+			this.splitContainer1.Panel1.ResumeLayout(false);
+			this.splitContainer1.Panel2.ResumeLayout(false);
+			this.splitContainer1.ResumeLayout(false);
+			this.groupBox2.ResumeLayout(false);
+			this.tableLayoutPanel2.ResumeLayout(false);
+			this.flowLayoutPanel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.ListBox bookmarkList;
+		private System.Windows.Forms.Button btnInitHost;
+		private System.Windows.Forms.Button bookmarkDel;
+		private System.Windows.Forms.Button bookmarkAdd;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.SplitContainer splitContainer1;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.CheckBox autoStart;
+		private System.Windows.Forms.Button webPolicyButton;
+		private System.Windows.Forms.Label msgAdmin;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.ComboBox cbWebPolicy;
+		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.ComboBox cbHeaderEncoding;
 		private System.Windows.Forms.ToolStripMenuItem hostDeleteItem;

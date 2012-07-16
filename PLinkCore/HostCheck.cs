@@ -32,12 +32,6 @@ namespace PLinkCore
 			this.After = After;
 		}
 		
-		public bool isFolder() { 
-			DirectoryInfo dir = new DirectoryInfo(After);
-			
-			return dir.Exists;
-		}		
-		
         public bool isUrl() { 
         	return (type == 2);
         }
@@ -72,5 +66,30 @@ namespace PLinkCore
 		{
 			return PLink.host.getHostItem(this.Before);
 		}
+		
+		public bool isFolder() { 
+			return Directory.Exists(After);
+		}		
+		
+		public bool isFile()
+		{
+			return File.Exists(After);
+		}		
+		
+		public bool isStatus()
+		{
+			return After.StartsWith("status@");
+		}
+		
+		
+		public int getStatusCode() { 
+			int len;
+			
+			if (int.TryParse(After.Replace("status@", ""), out len)) {
+				return len;	
+			} else { 
+				return 404;
+			}
+		}		
 	}
 }

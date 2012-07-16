@@ -50,7 +50,9 @@ namespace PLink
 			this.DisabledCacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.infomationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
 			this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.siteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.tabsViews = new System.Windows.Forms.TabControl();
@@ -58,8 +60,6 @@ namespace PLink
 			this.mnuNotify = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.restorePLinkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.closeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.siteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			this.tableLayoutPanel1.SuspendLayout();
 			this.panel1.SuspendLayout();
@@ -78,7 +78,7 @@ namespace PLink
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-			this.menuStrip1.Size = new System.Drawing.Size(712, 30);
+			this.menuStrip1.Size = new System.Drawing.Size(883, 30);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -155,16 +155,28 @@ namespace PLink
 			// infomationToolStripMenuItem
 			// 
 			this.infomationToolStripMenuItem.Name = "infomationToolStripMenuItem";
-			this.infomationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.infomationToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
 			this.infomationToolStripMenuItem.Text = "About";
 			this.infomationToolStripMenuItem.Click += new System.EventHandler(this.InfomationToolStripMenuItemClick);
+			// 
+			// toolStripSeparator1
+			// 
+			this.toolStripSeparator1.Name = "toolStripSeparator1";
+			this.toolStripSeparator1.Size = new System.Drawing.Size(109, 6);
 			// 
 			// githubToolStripMenuItem
 			// 
 			this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-			this.githubToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.githubToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
 			this.githubToolStripMenuItem.Text = "Github";
 			this.githubToolStripMenuItem.Click += new System.EventHandler(this.GithubToolStripMenuItemClick);
+			// 
+			// siteToolStripMenuItem
+			// 
+			this.siteToolStripMenuItem.Name = "siteToolStripMenuItem";
+			this.siteToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+			this.siteToolStripMenuItem.Text = "Site";
+			this.siteToolStripMenuItem.Click += new System.EventHandler(this.SiteToolStripMenuItemClick);
 			// 
 			// tableLayoutPanel1
 			// 
@@ -178,7 +190,7 @@ namespace PLink
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(712, 567);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(883, 567);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// panel1
@@ -187,7 +199,7 @@ namespace PLink
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(3, 33);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(706, 531);
+			this.panel1.Size = new System.Drawing.Size(877, 531);
 			this.panel1.TabIndex = 1;
 			// 
 			// tabsViews
@@ -197,7 +209,7 @@ namespace PLink
 			this.tabsViews.Multiline = true;
 			this.tabsViews.Name = "tabsViews";
 			this.tabsViews.SelectedIndex = 0;
-			this.tabsViews.Size = new System.Drawing.Size(706, 531);
+			this.tabsViews.Size = new System.Drawing.Size(877, 531);
 			this.tabsViews.TabIndex = 0;
 			// 
 			// notifyIcon1
@@ -230,23 +242,11 @@ namespace PLink
 			this.closeToolStripMenuItem1.Text = "Close";
 			this.closeToolStripMenuItem1.Click += new System.EventHandler(this.CloseToolStripMenuItem1Click);
 			// 
-			// toolStripSeparator1
-			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-			// 
-			// siteToolStripMenuItem
-			// 
-			this.siteToolStripMenuItem.Name = "siteToolStripMenuItem";
-			this.siteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.siteToolStripMenuItem.Text = "Site";
-			this.siteToolStripMenuItem.Click += new System.EventHandler(this.SiteToolStripMenuItemClick);
-			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(722, 577);
+			this.ClientSize = new System.Drawing.Size(893, 577);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStrip1;

@@ -194,11 +194,7 @@ namespace PLink
 			oSession.utilCreateResponseAndBypassServer();			
 			oSession.oResponse.headers.HTTPResponseCode = code;
 			
-			string status = "200 OK";
-			
-			if (code == 404) { 
-				status = "404 Not Found";	
-			}
+			string status = Util.getStatus(code);
 			
 			oSession.oResponse.headers.HTTPResponseStatus = status;
 			
@@ -215,27 +211,44 @@ namespace PLink
 		{
 			if (oSession.HTTPMethodIs("CONNECT")) {
 				oSession.hostname = patternCheck.afterHost();
-				
-				return true;
+
 			} else {
 				
-				if (patternCheck.isFolder()) { 
+				if (patternCheck.isStatus()) { 
+					int code = patternCheck.getStatusCode();
+					
+					sendResponse(oSession, code, "text/html", new byte[0]);
+					
+					return false; 
+				}				
+				
+				if (patternCheck.isFolder() || patternCheck.isFile()) {
 					string url = oSession.fullUrl;
 					int idx = url.LastIndexOf(patternCheck.Before);
 					
-					string first = url.Substring(0, idx);
-					string second = patternCheck.Before;
-					string last = url.Replace(first, "").Replace(second, "");
-					
-					log(first + " : " + second + " : " + last);
-					
-					if (string.IsNullOrEmpty(last) || last.Equals("/")) {
-						last = "/index.html";	
-					}
-					
-					
+					FileInfo file;
+					string target;
 
-					FileInfo file = new FileInfo(patternCheck.After + last);
+					if (patternCheck.isFolder()) { 
+					
+						string first = url.Substring(0, idx);
+						string second = patternCheck.Before;
+						string last = url.Replace(first, "").Replace(second, "");
+						
+						log(first + " : " + second + " : " + last);
+						
+						if (string.IsNullOrEmpty(last) || last.Equals("/")) {
+							last = "/index.html";	
+						}
+						
+						if (last[0] != '/') {  last = "/" + last; }
+					
+						target = patternCheck.After + last;						
+					} else { 
+						target = patternCheck.After;	
+					}
+
+					file = new FileInfo(target);
 					
 					if (file.Exists) { 
 						string content_type = MimeType.Get(file.Extension);
@@ -243,24 +256,19 @@ namespace PLink
 						
 						sendResponse(oSession, 200, content_type, data);
 						
-					} else { 
-					
-						byte[] data = Encoding.ASCII.GetBytes(@"PLink Server. HTTP/404 Not Found");
+						return false; 
 
-						sendResponse(oSession, 200, "text/html", data);
-						
 					}
-					
-					return false; 
 					
 					
 				} else { 				
 					oSession.fullUrl = patternCheck.afterUrl(oSession.fullUrl);
-					
-					return true; 
+
 				}
-				
+
 			}
+				
+			return true;			
 		}
 
 		// api 모드 실행

@@ -38,22 +38,27 @@ namespace PLinkCore
 		{
 			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
 			this.label1 = new System.Windows.Forms.Label();
+			this.textChange = new System.Windows.Forms.TextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.cbType = new System.Windows.Forms.ComboBox();
 			this.textPattern = new System.Windows.Forms.TextBox();
 			this.textDesc = new System.Windows.Forms.TextBox();
-			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-			this.textChange = new System.Windows.Forms.TextBox();
-			this.searchBtn = new System.Windows.Forms.Button();
+			this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+			this.searchFolder = new System.Windows.Forms.Button();
+			this.searchFile = new System.Windows.Forms.Button();
+			this.label5 = new System.Windows.Forms.Label();
+			this.cbHttpStatus = new System.Windows.Forms.ComboBox();
+			this.msgHttp = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.tableLayoutPanel1.SuspendLayout();
-			this.tableLayoutPanel3.SuspendLayout();
+			this.flowLayoutPanel1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tableLayoutPanel2.SuspendLayout();
@@ -65,23 +70,26 @@ namespace PLinkCore
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.45059F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 87.54941F));
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+			this.tableLayoutPanel1.Controls.Add(this.textChange, 1, 2);
 			this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
 			this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
-			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
+			this.tableLayoutPanel1.Controls.Add(this.label4, 0, 4);
 			this.tableLayoutPanel1.Controls.Add(this.cbType, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.textPattern, 1, 1);
-			this.tableLayoutPanel1.Controls.Add(this.textDesc, 1, 3);
-			this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 2);
+			this.tableLayoutPanel1.Controls.Add(this.textDesc, 1, 4);
+			this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 3);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 24);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(2);
-			this.tableLayoutPanel1.RowCount = 4;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(510, 119);
+			this.tableLayoutPanel1.RowCount = 5;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(510, 171);
 			this.tableLayoutPanel1.TabIndex = 0;
 			// 
 			// label1
@@ -89,17 +97,26 @@ namespace PLinkCore
 			this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.label1.Location = new System.Drawing.Point(5, 2);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(56, 28);
+			this.label1.Size = new System.Drawing.Size(56, 33);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Type";
 			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// textChange
+			// 
+			this.textChange.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.textChange.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.textChange.Location = new System.Drawing.Point(67, 71);
+			this.textChange.Name = "textChange";
+			this.textChange.Size = new System.Drawing.Size(438, 21);
+			this.textChange.TabIndex = 3;
+			// 
 			// label2
 			// 
 			this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label2.Location = new System.Drawing.Point(5, 30);
+			this.label2.Location = new System.Drawing.Point(5, 35);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(56, 28);
+			this.label2.Size = new System.Drawing.Size(56, 33);
 			this.label2.TabIndex = 1;
 			this.label2.Text = "Before";
 			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -107,9 +124,9 @@ namespace PLinkCore
 			// label3
 			// 
 			this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label3.Location = new System.Drawing.Point(5, 58);
+			this.label3.Location = new System.Drawing.Point(5, 68);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(56, 28);
+			this.label3.Size = new System.Drawing.Size(56, 33);
 			this.label3.TabIndex = 2;
 			this.label3.Text = "After";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -117,9 +134,9 @@ namespace PLinkCore
 			// label4
 			// 
 			this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.label4.Location = new System.Drawing.Point(5, 86);
+			this.label4.Location = new System.Drawing.Point(5, 134);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(56, 31);
+			this.label4.Size = new System.Drawing.Size(56, 35);
 			this.label4.TabIndex = 3;
 			this.label4.Text = "Desc";
 			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -142,7 +159,7 @@ namespace PLinkCore
 			// 
 			this.textPattern.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.textPattern.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textPattern.Location = new System.Drawing.Point(67, 33);
+			this.textPattern.Location = new System.Drawing.Point(67, 38);
 			this.textPattern.Name = "textPattern";
 			this.textPattern.Size = new System.Drawing.Size(438, 21);
 			this.textPattern.TabIndex = 2;
@@ -151,46 +168,77 @@ namespace PLinkCore
 			// 
 			this.textDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.textDesc.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textDesc.Location = new System.Drawing.Point(67, 89);
+			this.textDesc.Location = new System.Drawing.Point(67, 137);
 			this.textDesc.Name = "textDesc";
 			this.textDesc.Size = new System.Drawing.Size(438, 21);
 			this.textDesc.TabIndex = 4;
 			// 
-			// tableLayoutPanel3
+			// flowLayoutPanel1
 			// 
-			this.tableLayoutPanel3.ColumnCount = 2;
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.41096F));
-			this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.589041F));
-			this.tableLayoutPanel3.Controls.Add(this.textChange, 0, 0);
-			this.tableLayoutPanel3.Controls.Add(this.searchBtn, 1, 0);
-			this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tableLayoutPanel3.Location = new System.Drawing.Point(64, 58);
-			this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
-			this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-			this.tableLayoutPanel3.RowCount = 1;
-			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel3.Size = new System.Drawing.Size(444, 28);
-			this.tableLayoutPanel3.TabIndex = 8;
+			this.flowLayoutPanel1.Controls.Add(this.searchFolder);
+			this.flowLayoutPanel1.Controls.Add(this.searchFile);
+			this.flowLayoutPanel1.Controls.Add(this.label5);
+			this.flowLayoutPanel1.Controls.Add(this.cbHttpStatus);
+			this.flowLayoutPanel1.Controls.Add(this.msgHttp);
+			this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.flowLayoutPanel1.Location = new System.Drawing.Point(64, 101);
+			this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+			this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+			this.flowLayoutPanel1.Size = new System.Drawing.Size(444, 33);
+			this.flowLayoutPanel1.TabIndex = 9;
 			// 
-			// textChange
+			// searchFolder
 			// 
-			this.textChange.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.textChange.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.textChange.Location = new System.Drawing.Point(3, 3);
-			this.textChange.Name = "textChange";
-			this.textChange.Size = new System.Drawing.Size(395, 21);
-			this.textChange.TabIndex = 3;
+			this.searchFolder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.searchFolder.Location = new System.Drawing.Point(3, 3);
+			this.searchFolder.Name = "searchFolder";
+			this.searchFolder.Size = new System.Drawing.Size(85, 24);
+			this.searchFolder.TabIndex = 5;
+			this.searchFolder.Text = "Directory";
+			this.searchFolder.UseVisualStyleBackColor = true;
+			this.searchFolder.Click += new System.EventHandler(this.SearchBtnClick);
 			// 
-			// searchBtn
+			// searchFile
 			// 
-			this.searchBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.searchBtn.Location = new System.Drawing.Point(404, 3);
-			this.searchBtn.Name = "searchBtn";
-			this.searchBtn.Size = new System.Drawing.Size(37, 21);
-			this.searchBtn.TabIndex = 5;
-			this.searchBtn.Text = "...";
-			this.searchBtn.UseVisualStyleBackColor = true;
-			this.searchBtn.Click += new System.EventHandler(this.SearchBtnClick);
+			this.searchFile.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.searchFile.Location = new System.Drawing.Point(94, 3);
+			this.searchFile.Name = "searchFile";
+			this.searchFile.Size = new System.Drawing.Size(75, 23);
+			this.searchFile.TabIndex = 6;
+			this.searchFile.Text = "File";
+			this.searchFile.UseVisualStyleBackColor = true;
+			this.searchFile.Click += new System.EventHandler(this.SearchFileClick);
+			// 
+			// label5
+			// 
+			this.label5.Location = new System.Drawing.Point(175, 0);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(73, 32);
+			this.label5.TabIndex = 7;
+			this.label5.Text = "HTTP : ";
+			this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+			// 
+			// cbHttpStatus
+			// 
+			this.cbHttpStatus.FormattingEnabled = true;
+			this.cbHttpStatus.Items.AddRange(new object[] {
+									"200",
+									"404",
+									"403",
+									"500"});
+			this.cbHttpStatus.Location = new System.Drawing.Point(254, 3);
+			this.cbHttpStatus.Name = "cbHttpStatus";
+			this.cbHttpStatus.Size = new System.Drawing.Size(66, 20);
+			this.cbHttpStatus.TabIndex = 8;
+			this.cbHttpStatus.SelectedIndexChanged += new System.EventHandler(this.CbHttpStatusSelectedIndexChanged);
+			// 
+			// msgHttp
+			// 
+			this.msgHttp.Location = new System.Drawing.Point(326, 0);
+			this.msgHttp.Name = "msgHttp";
+			this.msgHttp.Size = new System.Drawing.Size(106, 32);
+			this.msgHttp.TabIndex = 9;
+			this.msgHttp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// groupBox1
 			// 
@@ -199,7 +247,7 @@ namespace PLinkCore
 			this.groupBox1.Location = new System.Drawing.Point(3, 3);
 			this.groupBox1.Name = "groupBox1";
 			this.groupBox1.Padding = new System.Windows.Forms.Padding(10);
-			this.groupBox1.Size = new System.Drawing.Size(530, 153);
+			this.groupBox1.Size = new System.Drawing.Size(530, 205);
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
 			// 
@@ -208,7 +256,7 @@ namespace PLinkCore
 			this.panel1.Controls.Add(this.button2);
 			this.panel1.Controls.Add(this.button1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-			this.panel1.Location = new System.Drawing.Point(368, 162);
+			this.panel1.Location = new System.Drawing.Point(368, 214);
 			this.panel1.Name = "panel1";
 			this.panel1.Size = new System.Drawing.Size(165, 35);
 			this.panel1.TabIndex = 2;
@@ -249,14 +297,18 @@ namespace PLinkCore
 			this.tableLayoutPanel2.RowCount = 2;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
-			this.tableLayoutPanel2.Size = new System.Drawing.Size(536, 200);
+			this.tableLayoutPanel2.Size = new System.Drawing.Size(536, 252);
 			this.tableLayoutPanel2.TabIndex = 3;
+			// 
+			// openFileDialog1
+			// 
+			this.openFileDialog1.FileName = "openFileDialog1";
 			// 
 			// PolicyForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(546, 210);
+			this.ClientSize = new System.Drawing.Size(546, 262);
 			this.Controls.Add(this.tableLayoutPanel2);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
 			this.MaximizeBox = false;
@@ -268,15 +320,19 @@ namespace PLinkCore
 			this.TopMost = true;
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
-			this.tableLayoutPanel3.ResumeLayout(false);
-			this.tableLayoutPanel3.PerformLayout();
+			this.flowLayoutPanel1.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.tableLayoutPanel2.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
-		private System.Windows.Forms.Button searchBtn;
-		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
+		private System.Windows.Forms.Label msgHttp;
+		private System.Windows.Forms.ComboBox cbHttpStatus;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.Button searchFile;
+		private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+		private System.Windows.Forms.Button searchFolder;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;

@@ -1,136 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <meta charset="utf-8">
+    <title>PLink - 개발환경 접속 에이전트 </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
+    <!-- Le styles -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="assets/css/docs.css" rel="stylesheet">
+    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
-    <title>PLink - Dev  Environment Connection  Agent</title>
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
   </head>
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>PLink</h1>
-        <h2>PLink - Dev  Environment Connection  Agent</h2>
-        <a href="https://github.com/NeowizGames/plink" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar" data-offset="10">
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>PLink - 개발환경 접속 에이전트</h1>
-
-<h2>PLInk 는 무엇인가요? </h2>
-
-<img src="images/plink/plink.jpg" />
-
-<p>PLink 는 네오위즈에서 사용하던 개발환경 접속 에이전트를 오픈소스로 옮긴 것입니다. </p>
-
-<h2>PLink 는 Proxy 입니다. </h2>
-
-<p> <div><img src="images/plink/fiddler.base.jpg" /></div> 출처 : http://www.fiddler2.com </p>
-
-<ol>
-<li>PLink 는 Proxy(Fiddler Addon)이기 때문에 웹브라우저와 상관없이 동작합니다. </li>
-<li>브라우저에 맞는 애드온을 설치하실 필요가 없습니다. </li>
-<li>브라우저에서 접속하는 url 과 실제로 요청하는 url 이 다르게 적용하기 때문에 <strong>개발환경 접속</strong>을 쉽게 하실 수 있습니다. </li>
-<li>
-<strong>hosts 파일을 변경하지 않기 때문에 새로운 브라우저를 열지 않고 새로고침만으로 바로 적용이 가능합니다.</strong> </li>
-<li>
-<strong>모바일 브라우저에서도 Proxy 설정만 하면 같은 개발환경을 바로 접속하실 수 있습니다.</strong> </li>
-<li>윈도우 전용 어플입니다. (다른 운영체제에서는 다르게 접속하실 수 있습니다.)  <a href="http://fiddler2.com/fiddler/help/hookup.asp">참고</a>
-</li>
-</ol><h2>개발환경 접속을 한다는게 무슨 말인가요?</h2>
-
-<p>보통 웹서비스를 개발한다고 한다면 <strong>alpha</strong>, <strong>beta</strong>, <strong>real</strong> 3가지 정도의 서버 규모가 있는데요. 
-alpha, beta 서버를 접근을 할려면  매번 수많은 도메인이 있는 hosts 파일을 수정해서 사용했어야 했습니다.<br>
-불편하기도 하고 특히나 웹브라우저에서 테스트 할 때는 브라우저를 새로 열어어야했습니다. 
-PLink 는 그러한 불편한 점을 많이 개선하였습니다. </p>
-
-<h2>PLink 는 어떤 기능이 있나요? </h2>
-
-<p>PLink 는 기본적으로 <a href="http://www.fiddler2.com">Fiddler</a> 를 기반으로 하고 있습니다. 
-기존에 웹 디버깅 툴로 Fiddler 를 많이 사용하고 계신데요.
-여기에 애드온 형태로 개발환경을 좀 더 편하게 접속 할 수 있는 기능들을 추가했습니다. </p>
-
-<h4>Change Home Url</h4>
-
-<p><code>www.pmang.com</code> =&gt; <code>dev.test.com/~neowizgame/home</code></p>
-
-<p>특정 디렉토리로 홈이 걸려 있는 경우 hosts 파일을 설정하지 않고 도메인을 바로 다른 URL로 매칭시키는 방법입니다. 
-개발자별로 특정 디렉토리를 가지고 있거나  하나의 호스팅 서비스에 개발환경을 구성할 때 유용한 방법입니다. </p>
-
-<h4>Hosts Simulate</h4>
-
-<p><code>www.pmang.com</code> =&gt; <code>www.test.com</code></p>
-
-<p>이 방법을 쓰면 실제로 연결 되는 곳이 <code>www.pmang.com</code> 으로 접근을 해도 실제로 연결되는 곳이 <code>www.test.com</code> 으로 연결이 됩니다. 
-이 방법은 hosts 파일을 바꾸는 것과 같은 효과를 주며 실제로 hosts파일을 변경하지 않고 host 를 변경한 효과를 주기 때문에<br>
-하나의 서버에 여러대의 서브 도메인을 가지고 있을 때 유용하게 사용하 실 수 있습니다. </p>
-
-<h4>Change Pattern</h4>
-
-<p>1,2 번의 방법은 도메인 자체에 대해서 적용이 되는 방법이었습니다. 
-마지막으로 3번 패턴 적용은  url 자체를 내부적으로 변환해서 실제 url 과 같은 효과를 줄 수 있게 변경합니다. </p>
-
-<p><code>www.pmang.com</code> =&gt; <code>www.test.com</code></p>
-
-<p><code>www.pmang.com/index.nwz</code> =&gt; <code>www.test.com/~neowizgames/test/index.nwz</code></p>
-
-<p><code>www.pmang.com/index_beta.nwz</code> =&gt; <code>www.test.com/~neowizgames/test_beta/index.nwz</code></p>
-
-<p>url 을 자체를 변환하기 때문에  1,2 에 더해서 좀 더 유용하게 패턴을 정의할 수 있습니다. </p>
-
-<p>위의 3가지 상태에 따라 여러가지 개발환경을 접속할 수 있는 기능을 가지게 됩니다. </p>
-
-<h2>PLink 는  Fiddler Addon 과 exe 버전  두 가지가 있습니다. </h2>
-
-        </section>
-
-        <aside id="sidebar">
-          <a href="https://github.com/NeowizGames/plink/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/NeowizGames/plink/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-
-          <p class="repo-owner"><a href="https://github.com/NeowizGames/plink"></a> is maintained by <a href="https://github.com/NeowizGames">NEOWIZ GAMES</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="./index.html">PLink</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">
+                <a href="./index.html">Home</a>
+              </li>
+              <li class="">
+                <a href="./getting-started.html">Get started</a>
+              </li>
+              <li class="">
+                <a href="./scaffolding.html">Scaffolding</a>
+              </li>
+              <li class="">
+                <a href="./base-css.html">Base CSS</a>
+              </li>
+              <li class="">
+                <a href="./components.html">Components</a>
+              </li>
+              <li class="">
+                <a href="./javascript.html">Javascript</a>
+              </li>
+              <li class="">
+                <a href="./customize.html">Customize</a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
 
-<footer>
-	<div class='inner'>
-		<h1>The MIT License (MIT)</h1>
+<div class="jumbotron masthead">
+  <div class="container">
+    <h1>PLink</h1>
+    <p>개발환경 접속 에이전트<br /> Hosts 파일 수정 그만하고 proxy 를 잘 써봅시다. </p>
+    <p><a href="https://github.com/NeowizGames/plink" class="btn btn-primary btn-large" >Download PLink</a></p>
+    <ul class="masthead-links">
+      <li><a href="https://github.com/NeowizGames/plink" >GitHub project</a></li>
+      <li>Version 1.4.0.0</li>
+    </ul>
+  </div>
+</div>
 
-		<h2>Copyright (c) 2012 NEOWIZ GAMES</h2>
+<div class="bs-docs-social">
+  <div class="container">
+    <ul class="bs-docs-social-buttons">
+      <li>
+        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=neowizgames&repo=plink&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="112px" height="20px"></iframe>
+      </li>
+      <li>
+        <iframe class="github-btn" src="http://ghbtns.com/github-btn.html?user=neowizgames&repo=plink&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="98px" height="20px"></iframe>
+      </li>
+      <li class="follow-btn">
+        <a href="https://twitter.com/easylogic" class="twitter-follow-button" data-link-color="#0069D6" data-show-count="true">Follow @easylogic</a>
+      </li>
+      <li class="tweet-btn">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://twitter.github.com/easylogic/" data-count="horizontal" data-via="twbootstrap" data-related="mdo:Creator of Twitter Bootstrap">Tweet</a>
+      </li>
+    </ul>
+  </div>
+</div>
 
-		<p>
-		Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-		<br />
-		<br />
-		The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-		<br />
-		<br />
-		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-		</p>
-	</div>
-</footer>	
-  
+<div class="container">
+
+  <div class="marketing">
+
+    <h1>PLink는 무엇인가요?</h1>
+    <p class="marketing-byline">웹서버 접속환경을 한결 편하게 해줍니다. 이제 해볼까요?</p>
+
+    <div class="row-fluid">
+      <div class="span4">
+        <img src="assets/img/bs-docs-twitter-github.png">
+        <h2>서버 접속, 이젠 Proxy로!</h2>
+        <p>웹개발환경 접속할 때 불편한 Hosts 파일 수정은 이제 그만하셔도 됩니다. Proxy 설정으로 한결 가볍게 접속하세요. </p>
+      </div>
+      <div class="span4">
+        <img src="assets/img/bs-docs-responsive-illustrations.png">
+        <h2>Fiddler 확장 모듈</h2>
+        <p>Fiddler 를 사용해서 만든 .Net 확장 모듈입니다. .Net 을 하실 수 있다면 좀 더 재미난 것들을 많이 만드실 수 있습니다. </p>
+      </div>
+      <div class="span4">
+        <img src="assets/img/bs-docs-bootstrap-features.png">
+        <h2>쉬운 개발서버 접속</h2>
+        <p>HOST, URL, REAL, PATTERN 의 4가지 타입을 활용해서 서버접속을 좀 더 쉽게 만들어줍니다. 파일서비스의 경우 웹서버가 없어도 됩니다.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+    <!-- Footer
+    ================================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>Designed and built with all the love in the world <a href="http://twitter.com/twitter" target="_blank">@twitter</a> by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
+        <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <p>Icons from <a href="http://glyphicons.com">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="footer-links">
+          <li><a href="http://blog.getbootstrap.com">Read the blog</a></li>
+          <li><a href="https://github.com/twitter/bootstrap/issues?state=open">Submit issues</a></li>
+          <li><a href="https://github.com/twitter/bootstrap/wiki">Roadmap and changelog</a></li>
+        </ul>
+      </div>
+    </footer>
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+    <script src="assets/js/jquery.js"></script>
+    <script src="assets/js/google-code-prettify/prettify.js"></script>
+    <script src="assets/js/bootstrap-transition.js"></script>
+    <script src="assets/js/bootstrap-alert.js"></script>
+    <script src="assets/js/bootstrap-modal.js"></script>
+    <script src="assets/js/bootstrap-dropdown.js"></script>
+    <script src="assets/js/bootstrap-scrollspy.js"></script>
+    <script src="assets/js/bootstrap-tab.js"></script>
+    <script src="assets/js/bootstrap-tooltip.js"></script>
+    <script src="assets/js/bootstrap-popover.js"></script>
+    <script src="assets/js/bootstrap-button.js"></script>
+    <script src="assets/js/bootstrap-collapse.js"></script>
+    <script src="assets/js/bootstrap-carousel.js"></script>
+    <script src="assets/js/bootstrap-typeahead.js"></script>
+    <script src="assets/js/bootstrap-affix.js"></script>
+    <script src="assets/js/application.js"></script>
+
+
+
   </body>
 </html>
